@@ -6,7 +6,6 @@ import br.com.sprint.Avaliacao4.controller.form.AssociadoForm;
 import br.com.sprint.Avaliacao4.modelo.Associado;
 import br.com.sprint.Avaliacao4.repository.AssociadoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -18,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
-import java.util.List;
 import java.util.Optional;
 
 @RestController
