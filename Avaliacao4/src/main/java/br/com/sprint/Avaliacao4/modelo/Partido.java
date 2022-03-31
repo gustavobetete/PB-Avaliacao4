@@ -1,12 +1,14 @@
 package br.com.sprint.Avaliacao4.modelo;
 
 import br.com.sprint.Avaliacao4.constants.Ideologia;
+import br.com.sprint.Avaliacao4.serializer.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -21,9 +23,10 @@ public class Partido {
     private String sigla;
     @Enumerated(EnumType.STRING)
     private Ideologia ideologia;
-    private Date data_Fundacao;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate data_Fundacao;
 
-    public Partido(String nome_partido, String sigla, Ideologia ideologia, Date data_fundacao) {
+    public Partido(String nome_partido, String sigla, Ideologia ideologia, LocalDate data_fundacao) {
         this.nome_Partido = nome_partido;
         this.sigla = sigla;
         this.ideologia = ideologia;

@@ -1,14 +1,9 @@
 package br.com.sprint.Avaliacao4.controller;
 
-import br.com.sprint.Avaliacao4.constants.Cargo;
 import br.com.sprint.Avaliacao4.constants.Ideologia;
-import br.com.sprint.Avaliacao4.controller.dto.AssociadoDto;
 import br.com.sprint.Avaliacao4.controller.dto.PartidoDto;
-import br.com.sprint.Avaliacao4.controller.form.AssociadoForm;
 import br.com.sprint.Avaliacao4.controller.form.PartidoForm;
-import br.com.sprint.Avaliacao4.modelo.Associado;
 import br.com.sprint.Avaliacao4.modelo.Partido;
-import br.com.sprint.Avaliacao4.repository.AssociadoRepository;
 import br.com.sprint.Avaliacao4.repository.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;

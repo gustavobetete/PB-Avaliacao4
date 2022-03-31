@@ -7,10 +7,11 @@ import br.com.sprint.Avaliacao4.repository.AssociadoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -26,7 +27,7 @@ public class AssociadoForm {
     private Cargo cargo;
 
     @NotNull(message = "O campo Data não pode ser nulo")
-    private Date data_Nascimento;
+    private LocalDate data_Nascimento;
 
     @NotNull(message = "O campo Sexo não pode ser nulo")
     private Sexo sexo;

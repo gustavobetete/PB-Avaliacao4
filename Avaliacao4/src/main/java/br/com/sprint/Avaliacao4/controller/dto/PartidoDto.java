@@ -1,13 +1,15 @@
 package br.com.sprint.Avaliacao4.controller.dto;
+
 import br.com.sprint.Avaliacao4.constants.Ideologia;
-import br.com.sprint.Avaliacao4.modelo.Associado;
 import br.com.sprint.Avaliacao4.modelo.Partido;
+import br.com.sprint.Avaliacao4.serializer.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.domain.Page;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -18,7 +20,8 @@ public class PartidoDto {
     private String nome_Partido;
     private String sigla;
     private Ideologia ideologia;
-    private Date data_Fundacao;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate data_Fundacao;
 
     public PartidoDto(Partido partido) {
         this.id = partido.getId();

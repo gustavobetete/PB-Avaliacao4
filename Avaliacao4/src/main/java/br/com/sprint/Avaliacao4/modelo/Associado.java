@@ -2,12 +2,14 @@ package br.com.sprint.Avaliacao4.modelo;
 
 import br.com.sprint.Avaliacao4.constants.Cargo;
 import br.com.sprint.Avaliacao4.constants.Sexo;
+import br.com.sprint.Avaliacao4.serializer.LocalDateSerializer;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -21,11 +23,12 @@ public class Associado {
     private String nome;
     @Enumerated(EnumType.STRING)
     private Cargo cargo;
-    private Date data_Nascimento;
+    @JsonSerialize(using = LocalDateSerializer.class)
+    private LocalDate data_Nascimento;
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
 
-    public Associado(String nome, Cargo cargo_politico, Date data_nascimento, Sexo sexo) {
+    public Associado(String nome, Cargo cargo_politico, LocalDate data_nascimento, Sexo sexo) {
         this.nome = nome;
         this.cargo = cargo_politico;
         this.data_Nascimento = data_nascimento;

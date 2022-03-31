@@ -1,9 +1,7 @@
 package br.com.sprint.Avaliacao4.controller.form;
 
 import br.com.sprint.Avaliacao4.constants.Ideologia;
-import br.com.sprint.Avaliacao4.modelo.Associado;
 import br.com.sprint.Avaliacao4.modelo.Partido;
-import br.com.sprint.Avaliacao4.repository.AssociadoRepository;
 import br.com.sprint.Avaliacao4.repository.PartidoRepository;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -12,7 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import java.util.Date;
+import java.time.LocalDate;
 
 @Data
 @AllArgsConstructor
@@ -33,7 +31,7 @@ public class PartidoForm {
     private Ideologia ideologia;
 
     @NotNull(message = "O campo Data fundação não pode ser nulo")
-    private Date data_Fundacao;
+    private LocalDate data_Fundacao;
 
     public Partido atualizar(Long id, PartidoRepository partidoRepository) {
         Partido partido = partidoRepository.getOne(id);
