@@ -20,7 +20,13 @@ public class Partido {
     private String nome_Partido;
     private String sigla;
     @Enumerated(EnumType.STRING)
-    private Ideologia Ideologia;
+    private Ideologia ideologia;
     private Date data_Fundacao;
 
+    public Partido(String nome_partido, String sigla, Ideologia ideologia, Date data_fundacao) {
+        this.nome_Partido = nome_partido;
+        this.sigla = sigla;
+        this.ideologia = ideologia;
+        this.data_Fundacao = data_fundacao;
+    }
 }

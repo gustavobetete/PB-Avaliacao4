@@ -20,9 +20,17 @@ public class Associado {
     private Long id;
     private String nome;
     @Enumerated(EnumType.STRING)
-    private Cargo cargo_Politico;
+    private Cargo cargo;
     private Date data_Nascimento;
     @Enumerated(EnumType.STRING)
     private Sexo sexo;
+
+    public Associado(String nome, Cargo cargo_politico, Date data_nascimento, Sexo sexo) {
+        this.nome = nome;
+        this.cargo = cargo_politico;
+        this.data_Nascimento = data_nascimento;
+        this.sexo = sexo;
+    }
+
 
 }
