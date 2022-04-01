@@ -3,8 +3,11 @@ package br.com.sprint.Avaliacao4.controller;
 import br.com.sprint.Avaliacao4.constants.Cargo;
 import br.com.sprint.Avaliacao4.controller.dto.AssociadoDto;
 import br.com.sprint.Avaliacao4.controller.form.AssociadoForm;
+import br.com.sprint.Avaliacao4.controller.form.VinculandoForm;
 import br.com.sprint.Avaliacao4.modelo.Associado;
+import br.com.sprint.Avaliacao4.modelo.Partido;
 import br.com.sprint.Avaliacao4.repository.AssociadoRepository;
+import br.com.sprint.Avaliacao4.repository.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -25,6 +28,9 @@ public class AssociadoController {
 
     @Autowired
     private AssociadoRepository associadoRepository;
+
+    @Autowired
+    private PartidoRepository partidoRepository;
 
     @GetMapping
     public Page<AssociadoDto> lista(@RequestParam(required = false) Cargo cargo,
@@ -80,4 +86,21 @@ public class AssociadoController {
         }
         return ResponseEntity.notFound().build();
     }
+
+    @PostMapping("/partidos")
+    @Transactional
+    public ResponseEntity<?> vinculaAssociadoAUmPartido(@RequestBody @Valid VinculandoForm form, UriComponentsBuilder uriBuilder){
+
+        if(form.getIdAssociado() != null && form.getIdPartido() != null) {
+            Associado associado = associadoRepository.getById(form.getIdAssociado());
+            Partido partido = partidoRepository.getById(form.getIdPartido());
+            associado.setPartido(partido);
+            associadoRepository.save(associado);
+
+            URI uri = uriBuilder.path("/associados/partidos").buildAndExpand(associado.getId()).toUri();
+            return ResponseEntity.created(uri).body("Inserido com SUCESSO! PARABENS");
+        }
+        throw new RuntimeException("Deu NULO!");
+    }
+
 }
