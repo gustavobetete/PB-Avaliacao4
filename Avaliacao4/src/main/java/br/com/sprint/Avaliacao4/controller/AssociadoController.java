@@ -103,4 +103,12 @@ public class AssociadoController {
         throw new RuntimeException("Deu NULO!");
     }
 
+    @DeleteMapping("/{idAssociado}/partidos/{idPartido}")
+    public ResponseEntity<?> deletarAssociadoPartido(@PathVariable Long idAssociado, @PathVariable Long idPartido){
+        Associado associado = associadoRepository.getById(idAssociado);
+        associado.setPartido(null);
+        associadoRepository.save(associado);
+        return ResponseEntity.ok().body("Deletado com sucesso!");
+    }
+
 }
