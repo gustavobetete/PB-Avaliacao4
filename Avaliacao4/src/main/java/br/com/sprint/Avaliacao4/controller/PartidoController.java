@@ -1,9 +1,12 @@
 package br.com.sprint.Avaliacao4.controller;
 
 import br.com.sprint.Avaliacao4.constants.Ideologia;
+import br.com.sprint.Avaliacao4.controller.dto.AssociadoDto;
 import br.com.sprint.Avaliacao4.controller.dto.PartidoDto;
 import br.com.sprint.Avaliacao4.controller.form.PartidoForm;
+import br.com.sprint.Avaliacao4.modelo.Associado;
 import br.com.sprint.Avaliacao4.modelo.Partido;
+import br.com.sprint.Avaliacao4.repository.AssociadoRepository;
 import br.com.sprint.Avaliacao4.repository.PartidoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -17,13 +20,18 @@ import org.springframework.web.util.UriComponentsBuilder;
 import javax.transaction.Transactional;
 import javax.validation.Valid;
 import java.net.URI;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/partidos")
 public class PartidoController {
     @Autowired
     private PartidoRepository partidoRepository;
+
+    @Autowired
+    private AssociadoRepository associadoRepository;
 
     @GetMapping
     public Page<PartidoDto> lista(@RequestParam(required = false) Ideologia ideologia,
@@ -78,5 +86,14 @@ public class PartidoController {
             return ResponseEntity.ok().build();
         }
         return ResponseEntity.notFound().build();
+    }
+
+    @GetMapping("/{id}/associados")
+    public List<AssociadoDto> listaTodosAssociados(@PathVariable Long id){
+
+        List<Associado> associado = associadoRepository.findByPartidoId(id);
+        List<AssociadoDto> associadoDto = associado.stream().map(AssociadoDto::new).collect(Collectors.toList());
+        return associadoDto;
+
     }
 }
